@@ -11,11 +11,11 @@ This repository steps students through the project in a 1-day tutorial, beginnin
 
 - [RMIT SCT Falling Ball Workshop](#rmit-sct-falling-ball-workshop)
   - [Setup and Requirements](#setup-and-requirements)
-  - [Tutorial](#tutorial)
-    - [Step 0: Setup VSCode and the code](#step-0-setup-vscode-and-the-code)
-    - [Step 1: Set up the screen and draw a ball](#step-1-set-up-the-screen-and-draw-a-ball)
-      - [Drawing a ball in the screen](#drawing-a-ball-in-the-screen)
-    - [Step 2: Move the ball higher up](#step-2-move-the-ball-higher-up)
+  - [Tutorial Overview](#tutorial-overview)
+  - [Step 0: Setup VSCode and the code](#step-0-setup-vscode-and-the-code)
+  - [Step 1: Set up the screen and draw a ball](#step-1-set-up-the-screen-and-draw-a-ball)
+    - [Drawing a ball in the screen](#drawing-a-ball-in-the-screen)
+  - [Step 2: Move the ball higher up](#step-2-move-the-ball-higher-up)
   - [Step 3: Make the ball fall at constant speed](#step-3-make-the-ball-fall-at-constant-speed)
   - [Step 4: Add a floor](#step-4-add-a-floor)
     - [Detect collision with the floor](#detect-collision-with-the-floor)
@@ -28,7 +28,6 @@ This repository steps students through the project in a 1-day tutorial, beginnin
   - [Step 10 (EXTENSION): Use Pygame's built-in collision detection](#step-10-extension-use-pygames-built-in-collision-detection)
   - [Contributors](#contributors)
 
-
 ## Setup and Requirements
 
 This tutorial requires the following software:
@@ -39,7 +38,7 @@ This tutorial requires the following software:
 
 The linked [Installation](INSTALL.md) instructions install these requirements for Windows and Mac.
 
-## Tutorial
+## Tutorial Overview
 
 In this tutorial, we will use code to control what appears on the screen. Coding is how we tell the computer what to do, using a programming language—in this case, Python. Python is widely used because it is easy to read (the code looks a bit like plain English!) and can be used in many areas. It is used by companies like Google, Netflix, Spotify, and NASA, and across fields like web development, data science, automation, scientific research, game design, and healthcare—for things like predictive analytics and image analysis. It works well for beginners and is powerful enough for complex projects. 👍
 
@@ -53,7 +52,7 @@ The system uses Python and [pygame](http://www.pygame.org/wiki/about), a toolkit
 
 We have already provided an initial code template in file [fall.py](fall.py). You need to copy-and-paste the contents of this file into your own VSCode folder.
 
-### Step 0: Setup VSCode and the code
+## Step 0: Setup VSCode and the code
 
 To get started with this tutorial, you will need to use VSCode, and get the starting Python code file. To get underway:
 
@@ -74,7 +73,7 @@ You should see the following window, with a ball (or it is a sun? 🌞) in the c
 
 ![](assets/step_00-initial-screen.png)
 
-### Step 1: Set up the screen and draw a ball
+## Step 1: Set up the screen and draw a ball
 
 In the first step, we just want to **understand** the code we were given. Having a good understanding of each piece will be important to know how to modify it later on... 😉
 
@@ -156,7 +155,7 @@ In the second step, which we will explain below, the simulation **does all the u
 
 The final step in each simulation cycle is to **re-draw and update the screen**, that is, to draw the "new picture" with the changes just done in step 2! ✏️
 
-#### Drawing a ball in the screen
+### Drawing a ball in the screen
 
 Let us look at the second step in the simulation cycle. The initial code does two things:
 
@@ -186,7 +185,7 @@ If you're using VS Code, you can hover over the function name to see what inputs
 
 > **QUESTION**: what would happen if we swap the instructions, and we first draw the ball and then fill the background? Try it!
 
-### Step 2: Move the ball higher up
+## Step 2: Move the ball higher up
 
 Time to do implement some of _our_ changes!
 
