@@ -9,13 +9,22 @@ This workshop is based on the Scratch project [Falling Ball](https://scratch.mit
 
 This repository steps students through the project in a 1-day tutorial, beginning with starter code in [fall.py](fall.py).
 
+- [RMIT SCT Falling Ball Workshop](#rmit-sct-falling-ball-workshop)
+  - [Setup and Requirements](#setup-and-requirements)
+  - [Tutorial](#tutorial)
+    - [Step 0: Setup VSCode and the code](#step-0-setup-vscode-and-the-code)
+    - [Step 1: Set up the screen and draw a ball](#step-1-set-up-the-screen-and-draw-a-ball)
+      - [Drawing a ball in the screen](#drawing-a-ball-in-the-screen)
+  - [Contributors](#contributors)
+
+
 ## Setup and Requirements
 
 This tutorial requires the following software:
 
-* Python 3.10+
-* [pygame](https://www.pygame.org/wiki/about) library
-* [VSCode](https://code.visualstudio.com/) as the IDE
+- Python 3.10+
+- [pygame](https://www.pygame.org/wiki/about) library
+- [VSCode](https://code.visualstudio.com/) as the IDE
 
 The linked [Installation](INSTALL.md) instructions install these requirements for Windows and Mac.
 
@@ -43,7 +52,7 @@ To get started with this tutorial, you will need to use VSCode, and get the star
 
     ![](assets/gh-download.png)
 
-    * Alternatively, you create an empty file [`fall.py`](https://raw.githubusercontent.com/outreach-csit/falling-ball-public/refs/heads/main/fall.py?token=GHSAT0AAAAAAC5GJNQPCTNCQHAGILHIVDE2Z7SGBWA) with VSCode in your project and then do copy-and-paste; GitHub has s button to copy the file contents into memory:
+    - Alternatively, you create an empty file [`fall.py`](https://raw.githubusercontent.com/outreach-csit/falling-ball-public/refs/heads/main/fall.py?token=GHSAT0AAAAAAC5GJNQPCTNCQHAGILHIVDE2Z7SGBWA) with VSCode in your project and then do copy-and-paste; GitHub has s button to copy the file contents into memory:
 4. Save the file.
 
 All ready, it is time to run the code. You can do that by clinking the **PLAY** triangle button in the top-right corner of the VSCode window:
@@ -56,11 +65,13 @@ You should see the following window, with a ball (or it is a sun? 🌞) in the c
 
 ### Step 1: Set up the screen and draw a ball
 
+In the first step, we just want to **understand** the code we were given. Having a good understanding of each piece will be important to know how to modify it later on... 😉
+
 In Pygame—and in most libraries designed for drawing or graphics—the screen is like a piece of graph paper. In fact, as you learnt in school, the window created is a **Cartesian plane**, as you learnt in school! As the window is a 2D plane, we refer to a particular point (or location) in it using the `x` and `y` coordinate system. A point is called a "pixel", and we can set each pixel to different colors.
 
-* The top-left corner is `(0, 0)`.
-* Moving to the right increases the `x` coordinate. Moving down increases `y`.
-* So point `(100, 100)` means 100 pixels across and 100 pixels down.
+- The top-left corner is `(0, 0)`.
+- Moving to the right increases the `x` coordinate. Moving down increases `y`.
+- So point `(100, 100)` means 100 pixels across and 100 pixels down.
 
 Let us understand the skeleton code before modifying it. 👀
 
@@ -88,87 +99,82 @@ SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))  # Create the screen window
 pygame.display.set_caption('Falling Ball Simulation :)')  # Window title
 ```
 
-Here, `WIDTH` and `HEIGHT` are the **variables** storing the size of the window we want to create. 
+Here, `WIDTH` and `HEIGHT` are the **variables** storing the size of the window we want to create.
 
 The variable `SCREEN` is the most important one here: it refers to the whole Pygame screen window and we will use it to draw things on it!
 
-> **QUESTION**
-> Remember we said that point `(0, 0)` is the top-left one in the screen? Well, our right-bottom pixel will then be `(1199, 799)`. _What would the middle of the screen window be?_
+> **QUESTION*: Remember we said that point `(0, 0)` is the top-left one in the screen? Well, our right-bottom pixel will then be `(1199, 799)`. _What would the middle of the screen window be?_
 
-
-Here is the basic code to open a window and draw a circle (our ball) in the middle. You just need to run it and test it.
-
-You’ll also see **functions** and **variables** in action. For example:
+Next, we define three **variables** that define the size of the ball we want to draw, and its initial location in the center of the screen:
 
 ```python
-pygame.draw.circle(SCREEN, (250, 160, 30), (ball_x, ball_y), BALL_RADIUS)
+# Ball properties
+ball_radius = 50  # size of the ball
+ball_x = WIDTH // 2  # initial x position of the ball
+ball_y = HEIGHT // 2  # initial y position of the ball
 ```
 
-This line draws a circle on the screen:
+A **simulation** is implemented like a "[_flipbook_](https://en.wikipedia.org/wiki/Flip_book)", by drawing different pictures over and over, one after another, very very fast. Each picture will be a small step in the simulation, for example the ball moving just a tiny bit.
 
-- `SCREEN` is where we're drawing it.
-- `(250, 160, 30)` is the colour in RGB (red, green, blue).
-- `(ball_x, ball_y)` gives the position.
-- `BALL_RADIUS` is the size.
+Concretely, a simulation is a continuous repetition of three phases:
 
-In this case, `pygame` is the library, `draw` is the module inside it, and `circle` is the function that does the actual drawing. If you're using VS Code, you can hover over the function name to see what inputs it takes. Or you can search online—typing something like “pygame draw circle” into your browser will often give you clear documentation and examples. You can also use the interactive Python shell to explore help functions if you're comfortable doing so.
+1. Check if user has closed the screen (with the mouse). If so, terminate the simulation.
+2. Do all the changes to the current state of the simulation, for example, move the ball location.
+3. Re-draw the screen with the new state of the simulation.
 
-Here’s the full code for this step:
+This repetition is implemented by a `while` loop, that will execute a given piece of code until the simulation is not running anymore. To store whether the simulation is running, we make use a boolean variable `simulation_runnning`, which is initially `True` and made `False` when the user closes the window. This is how the simulation-cycle looks like:
 
 ```python
-"""
-- Setup import modules
-- Draw screen stage where things will happen
-- Draw a circle in a position
-"""
-
-import pygame  # Import the Pygame library
-pygame.init()  # Set up Pygame
-
-# Set up consistent frame rate
-clock = pygame.time.Clock()
-FPS = 60  # Frames per second – how often the screen updates
-
-# Set up the screen
-WIDTH = 1200
-HEIGHT = 800
-SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))  # Create the screen window
-pygame.display.set_caption('Falling Ball Simulation :)')  # Window title
-
-# Constants
-BALL_RADIUS = 50  # Size of the ball
-
-# Variables
-run = True  # Controls the main loop
-ball_x = WIDTH // 2  # Horizontal position of the ball on the screen.
-ball_y = HEIGHT // 2  # Vertical position of the ball on the screen.
-
 # Main game loop
-while run:
-    # Loop through all events
-    for event in pygame.event.get():
-        # If the X / close button is pressed, exit the loop
-        if event.type == pygame.QUIT:
-            run = False
+simulation_runnning = True  # Controls the main loop
+while simulation_runnning:
+    ...
+    # 1. if window is closed; set simulation_runnning = False
+    ...
+    # 2. do some changes to the SCREEN
+    ...
 
-    # Draw background and ball
-    SCREEN.fill('sky blue')  # Fill the screen with a sky blue background
-    pygame.draw.circle(SCREEN, (250, 160, 30), (ball_x, ball_y), BALL_RADIUS)  # Draw the ball
-
-    # Move (not used yet – placeholder)
-
-    # Update display and wait to maintain consistent frame rate
+    # 3. Update display and wait to keep frame rate
     pygame.display.update()
     clock.tick(FPS)  # Delay to keep frame rate steady
 ```
 
-When you run this, you’ll see a circle drawn in a window.
+We have not shown the code for the first step, it is not that interesting. Basically, it will set  variable `simulation_runnning` to False, which will cuase the `while` look to terminate, and the whole program finishes: there is nothing left in th program to execute...
+
+In the second step, which we will explain below, the simulation **does all the updates in the `SCREEN` for the cycle**, for example, changing the position of the ball, setting its (new) color, changing the background color or picture, etc.
+
+The final step in each simulation cycle is to **re-draw and update the screen**, that is, to draw the "new picture" with the changes just done in step 2! ✏️
+
+#### Drawing a ball in the screen
+
+Let us look at the second step in the simulation cycle. The initial code does two things:
+
+1. Paint the screen blue, to represent the background.
+2. Draw a circle in the middle of the screen to represent the ball.
+
+Both steps are changes to the simulation screen, which is always stored in variable `SCREEN` created at the very start as we explained above. So here is the code for those two instructions:
+
+```python
+SCREEN.fill('sky blue')  # Fill the screen with a sky blue background
+pygame.draw.circle(SCREEN, (250, 160, 30), (ball_x, ball_y), ball_radius)  # Draw the ball
+```
+
+The first command "fills" the `SCREEN` with `sky blue` color, while the second one draws a circle with the following information:
+
+- `SCREEN` is where we want the circle to be drawn, namely, in the window of the simulation.
+- `(250, 160, 30)` is the colour in RGB (red, green, blue).
+- `(ball_x, ball_y)` gives the position.
+- `ball_radius` is the size of the ball.
+
+In this case, `pygame` is the library, `draw` is the module inside it, and `circle` is the **function** that does the actual drawing. All is provided by the library we imported at the top!
+
+If you're using VS Code, you can hover over the function name to see what inputs it takes. Or you can search online—typing something like “pygame draw circle” into your browser will often give you clear documentation and examples. You can also use the interactive Python shell to explore help functions if you're comfortable doing so.
 
 
 ## Contributors
 
-* Prof. Sebastian Sardina (contact: sebastian.sardina@rmit.edu.au)
-* Mr. Marcos Sardina (original Scratch project and first translation to Python)
-* Dr. Timothy Wiley
-* Dr. Irina Grossman
-* Dr. Daniel Beck
+- Prof. Sebastian Sardina (contact: sebastian.sardina@rmit.edu.au)
+- Mr. Marcos Sardina (original Scratch project and first translation to Python)
+- Dr. Timothy Wiley
+- Dr. Irina Grossman
+- Dr. Daniel Beck
