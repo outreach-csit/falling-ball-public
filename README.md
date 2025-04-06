@@ -17,6 +17,8 @@ This repository steps students through the project in a 1-day tutorial, beginnin
       - [Drawing a ball in the screen](#drawing-a-ball-in-the-screen)
     - [Step 2: Move the ball higher up](#step-2-move-the-ball-higher-up)
   - [Step 3: Make the ball fall at constant speed](#step-3-make-the-ball-fall-at-constant-speed)
+  - [Step 4: Add a floor](#step-4-add-a-floor)
+    - [Detect collision with the floor](#detect-collision-with-the-floor)
   - [Contributors](#contributors)
 
 
@@ -175,6 +177,8 @@ In this case, `pygame` is the library, `draw` is the module inside it, and `circ
 
 If you're using VS Code, you can hover over the function name to see what inputs it takes. Or you can search online—typing something like “pygame draw circle” into your browser will often give you clear documentation and examples. You can also use the interactive Python shell to explore help functions if you're comfortable doing so.
 
+> **QUESTION**: what would happen if we swap the instructions, and we first draw the ball and then fill the background? Try it!
+
 ### Step 2: Move the ball higher up
 
 Time to do implement some of _our_ changes!
@@ -214,6 +218,49 @@ ball_y = ball_y + 3
 Now go ahead and implement the change. Be careful to do the change before the draw is drawn and inside the simulation loop (in the second phase). By updating `ball_y` by a small amount
 
 To try this, add `ball_y += 3` just below the `# Move` line in your code. When you run it, the ball should now fall downward at a constant speed. 👍
+
+## Step 4: Add a floor
+
+Wow, _how come the ball keeps going down and disappears out of the screen?_ What happens when `ball_y` becomes larger than the value of `HEIGHT` (800 in our case)? 
+
+The fact is that, at the moment, the ball just keeps falling because there is nothing telling it to stop.
+
+To make the simulation more realistic, let us add a **floor and stop the ball once it hits it** 🛑. 
+
+First, we define some new constants, somewhere before the simulation loop:
+
+```python
+FLOOR_HEIGHT = 100
+FLOOR_Y = HEIGHT - FLOOR_HEIGHT
+```
+
+This means the floor is 100 pixels high, and it starts at the bottom of the screen. Make sure to include good comments to your new code 😉
+
+Then, just below the `pygame.draw.circle` line, we draw a rectangle to show the floor:
+
+```python
+pygame.draw.rect(SCREEN, "black", (0, FLOOR_Y, WIDTH, HEIGHT))
+```
+
+**Try it!**
+
+### Detect collision with the floor
+
+We have the floor, but the ball keeps going through it! 😕 Remember, for the computer these are just colors.
+
+We want the door to stop short when it hits the floor, right? What does that mean in the code? Well, when the ball `y` position is the same (or more?) as the start of the floor....
+
+When the ball is at the floor, we simply stop the ball to be _at_ the floor. This means that the code to move the ball down that we did above, only has to run if the ball is not touching the floor.
+
+To execute a particular code based on a particular condition, we use the `if` construct. Let us change the update of the code we did to check whether the bottom of the ball has passed the top of the floor. Only if it hasn’t (`not`), we keep it falling:
+
+```python
+if not (ball_y) > FLOOR_Y:
+    ball_y += 3
+```
+
+Try it! Does it work? If not exactly as you would expect, _why?_ What does the coordinate `(ball_x, ball_y)` represent exactly? What place in the ball? Think how you can fix it by slightly fixing teh condition in the `if`-conditional.
+
 
 ## Contributors
 

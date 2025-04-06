@@ -30,12 +30,11 @@ while simulation_running:
         if event.type == pygame.QUIT:
             simulation_running = False
 
+    # Move (not used yet – placeholder)
+
     # Draw background and ball
     SCREEN.fill('yellow')  # Fill the screen with a sky blue background
     pygame.draw.circle(SCREEN, 'blue', (ball_x, ball_y), ball_radius)  # Draw the ball
-
-
-    # Move (not used yet – placeholder)
 
     # Update display and wait to keep frame rate
     pygame.display.update()
