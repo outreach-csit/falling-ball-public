@@ -15,6 +15,7 @@ This repository steps students through the project in a 1-day tutorial, beginnin
     - [Step 0: Setup VSCode and the code](#step-0-setup-vscode-and-the-code)
     - [Step 1: Set up the screen and draw a ball](#step-1-set-up-the-screen-and-draw-a-ball)
       - [Drawing a ball in the screen](#drawing-a-ball-in-the-screen)
+    - [Step 2: Move the ball higher up](#step-2-move-the-ball-higher-up)
   - [Contributors](#contributors)
 
 
@@ -155,14 +156,14 @@ Let us look at the second step in the simulation cycle. The initial code does tw
 Both steps are changes to the simulation screen, which is always stored in variable `SCREEN` created at the very start as we explained above. So here is the code for those two instructions:
 
 ```python
-SCREEN.fill('sky blue')  # Fill the screen with a sky blue background
-pygame.draw.circle(SCREEN, (250, 160, 30), (ball_x, ball_y), ball_radius)  # Draw the ball
+SCREEN.fill("yellow")  # Fill the screen with a sky blue background
+pygame.draw.circle(SCREEN, "blue", (ball_x, ball_y), ball_radius)  # Draw the ball
 ```
 
-The first command "fills" the `SCREEN` with `sky blue` color, while the second one draws a circle with the following information:
+The first command "fills" the `SCREEN` with `yellow` color, while the second one draws a circle with the following information:
 
 - `SCREEN` is where we want the circle to be drawn, namely, in the window of the simulation.
-- `(250, 160, 30)` is the colour in RGB (red, green, blue).
+- `blue` is the colour we want the ball to be inside.
 - `(ball_x, ball_y)` gives the position.
 - `ball_radius` is the size of the ball.
 
@@ -170,6 +171,16 @@ In this case, `pygame` is the library, `draw` is the module inside it, and `circ
 
 If you're using VS Code, you can hover over the function name to see what inputs it takes. Or you can search online—typing something like “pygame draw circle” into your browser will often give you clear documentation and examples. You can also use the interactive Python shell to explore help functions if you're comfortable doing so.
 
+### Step 2: Move the ball higher up
+
+Time to do implement some of _our_ changes!
+
+In this step, you are to:
+
+1. Change the background of the simulation to whatever color you prefer. 🖌️ Most obvious colors will be accepted, but there are many more Pygame knows about [here](https://www.pygame.org/docs/ref/color_list.html).
+2. Put the ball higher up in the screen. You can do that by changing the variable that holds the `y` coordinate of the ball. 😉 Put the ball up in the screen so that it has "space" to fall, but is all visible. _What number would you use?_Remember that `(0, 0)` is not the middle of the screen, but the top-left corner.
+
+Go ahead and set the initial simulation step as you wish! 🖐️
 
 ## Contributors
 

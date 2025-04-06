@@ -31,8 +31,8 @@ while simulation_running:
             simulation_running = False
 
     # Draw background and ball
-    SCREEN.fill('sky blue')  # Fill the screen with a sky blue background
-    pygame.draw.circle(SCREEN, (250, 160, 30), (ball_x, ball_y), ball_radius)  # Draw the ball
+    SCREEN.fill('yellow')  # Fill the screen with a sky blue background
+    pygame.draw.circle(SCREEN, 'blue', (ball_x, ball_y), ball_radius)  # Draw the ball
 
 
     # Move (not used yet – placeholder)
