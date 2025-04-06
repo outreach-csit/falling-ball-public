@@ -1,8 +1,19 @@
 """
-- Setup import modules
-- Draw screen stage where things will happen
-- Draw a circle in a position
+WORKSHOP Monday April 7th 2025 - SLDWC​ Young Women in Aerospace​
+
+This is the first step in creating a falling ball simulation.
+The code will be built up in steps, with each step adding more functionality.
+
+The code is based on the Pygame library, which is a Python library for creating games and multimedia applications.
+
+The template includes:
+- Setup import modules.
+- Draw screen stage where things will happen.
+- Draw a circle in a position.
+
+HAVE FUN!
 """
+
 import pygame  # we will use the Pygame library
 pygame.init()  # initialize the library
 
