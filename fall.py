@@ -3,9 +3,8 @@
 - Draw screen stage where things will happen
 - Draw a circle in a position
 """
-
-import pygame  # Import the Pygame library
-pygame.init()  # Set up Pygame
+import pygame  # we will use the Pygame library
+pygame.init()  # initialize the library
 
 # Set up consistent frame rate
 clock = pygame.time.Clock()
