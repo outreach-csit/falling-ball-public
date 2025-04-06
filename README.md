@@ -7,7 +7,7 @@ You'll learn the basics of physics behind free fall (including position, velocit
 
 This workshop is based on the Scratch project [Falling Ball](https://scratch.mit.edu/projects/1106875189/).
 
-This repository steps students through the project in a 1-day tutorial, beginning with starter code in [falling_ball.py](falling_ball.py).
+This repository steps students through the project in a 1-day tutorial, beginning with starter code in [fall.py](fall.py).
 
 ## Setup and Requirements
 
@@ -31,7 +31,28 @@ The tutorial is organised into **10 steps** 🦶. Each step adds a new idea and 
 
 The system uses Python and [pygame](http://www.pygame.org/wiki/about), a toolkit to write games. 🎮
 
-We have already provided an initial code template in file [falling_ball.py](falling_ball.py). You need to copy-and-paste the contents of this file into your own VSCode folder.
+We have already provided an initial code template in file [fall.py](fall.py). You need to copy-and-paste the contents of this file into your own VSCode folder.
+
+### Step 0: Setup VSCode and the code
+
+To get started with this tutorial, you will need to use VSCode, and get the starting Python code file. To get underway:
+
+1. Open VSCode.
+2. Create a new folder where you want your project to be, for example, folder `falling-ball`.
+3. Download the file `fall.py` file to your project folder. This can be done by using the download button at the top right corner in the file in GitHub:
+
+    ![](assets/gh-download.png)
+
+    * Alternatively, you create an empty file [`fall.py`](https://raw.githubusercontent.com/outreach-csit/falling-ball-public/refs/heads/main/fall.py?token=GHSAT0AAAAAAC5GJNQPCTNCQHAGILHIVDE2Z7SGBWA) with VSCode in your project and then do copy-and-paste; GitHub has s button to copy the file contents into memory:
+4. Save the file.
+
+All ready, it is time to run the code. You can do that by clinking the **PLAY** triangle button in the top-right corner of the VSCode window:
+
+![run](assets/vscode-run.png)
+
+You should see the following window, with a ball (or it is a sun? 🌞) in the center of the stage:
+
+![](assets/step_00-initial-screen.png)
 
 ## Contributors
 
