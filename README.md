@@ -19,6 +19,13 @@ This repository steps students through the project in a 1-day tutorial, beginnin
   - [Step 3: Make the ball fall at constant speed](#step-3-make-the-ball-fall-at-constant-speed)
   - [Step 4: Add a floor](#step-4-add-a-floor)
     - [Detect collision with the floor](#detect-collision-with-the-floor)
+  - [Step 5: Add gravity as acceleration](#step-5-add-gravity-as-acceleration)
+  - [Step 6: Make the ball bounce (no energy loss)](#step-6-make-the-ball-bounce-no-energy-loss)
+  - [Step 7: Add energy loss when bouncing](#step-7-add-energy-loss-when-bouncing)
+  - [Step 8: Change circle to an image, add floor/background](#step-8-change-circle-to-an-image-add-floorbackground)
+  - [Step 9: Add music](#step-9-add-music)
+  - [CONGRATULATIONS!](#congratulations)
+  - [Step 10 (EXTENSION): Use Pygame's built-in collision detection](#step-10-extension-use-pygames-built-in-collision-detection)
   - [Contributors](#contributors)
 
 
@@ -221,11 +228,11 @@ To try this, add `ball_y += 3` just below the `# Move` line in your code. When y
 
 ## Step 4: Add a floor
 
-Wow, _how come the ball keeps going down and disappears out of the screen?_ What happens when `ball_y` becomes larger than the value of `HEIGHT` (800 in our case)? 
+Wow, _how come the ball keeps going down and disappears out of the screen?_ What happens when `ball_y` becomes larger than the value of `HEIGHT` (800 in our case)?
 
 The fact is that, at the moment, the ball just keeps falling because there is nothing telling it to stop.
 
-To make the simulation more realistic, let us add a **floor and stop the ball once it hits it** 🛑. 
+To make the simulation more realistic, let us add a **floor and stop the ball once it hits it** 🛑.
 
 First, we define some new constants, somewhere before the simulation loop:
 
@@ -261,6 +268,236 @@ if not (ball_y) > FLOOR_Y:
 
 Try it! Does it work? If not exactly as you would expect, _why?_ What does the coordinate `(ball_x, ball_y)` represent exactly? What place in the ball? Think how you can fix it by slightly fixing teh condition in the `if`-conditional.
 
+## Step 5: Add gravity as acceleration
+
+In real life, gravity speeds things up as they fall. We can copy that by gradually increasing the ball’s speed every frame.
+
+There are actually three concepts in classical dynamics:
+
+1. **Position:** where an object is. In our case, the ball is, at any point in time, at a coordinate `(x, y)`
+2. **Velocity:** the rate of change of the position, like km/h in a car. In our case, the vertical velocity of our ball above is how many pixels the ball drops per simulation cycle (3 pixels/cycle).
+3. **Accelleration:** the rate of change of the velocity, like the gravitational acceleration of 9.834 m/s2. In our case, we want the ball to fall faster and faster as it approaches the floor, thus simulating the gravitational force.
+
+In order to implement gravitational acceleration on the ball, we first need to change the fix velocity of 3 pixels/cycle implemented above so that it can change as the simulation runs. To do so, first replace the `3` with a variable called `ball_vel` which should be 0 at the start:
+
+```python
+ball_x = WIDTH // 2
+ball_y = HEIGHT // 2
+ball_velocity = 0   # current velocity of the ball
+```
+
+Then, we need to update the `y`-position of the ball to increment by the current velocity of the ball:
+
+```python
+ball_y += ball_velocity
+```
+
+Next, define a constant (a variable that never changes, usually written full capital letters)  `GRAVITY` and set it to, say, 0.50 pixels/cycle:
+
+```python
+GRAVITY = 0.50
+```
+
+Finally, similarly to the update of the ball location (by its velocity), add code to change the velocity of the ball by the gravity value. You r code should look like this (but think carefully where you will place it 🤔):
+
+```python
+# apply gravity
+ball_velocity += GRAVITY
+```
+
+Now, _what should the velocity when the ball does hit the floor?_ Check the code already done for recognising the coalition to the floor, and when there is a collision, reset its velocity. You can use the `else` in the `if` condition:
+
+```python
+    if not (......) > FLOOR_Y:
+        ball_y += ball_velocity
+    else:
+        ball_velocity = ...
+```
+
+Now when you Run the file the ball should fall faster and faster and then stop when it hits the floor... 🏀
+
+## Step 6: Make the ball bounce (no energy loss)
+
+We are doing great, but surely a ball doesn't get stuck in the floor at the first collision, at least not a soccer ⚽ or basketball 🏀 ball!
+
+Think about it. What happens with the ball's velocity if the ball is meant to _bounce_? Should you keep adding to the ball's `y`-coordinate or should you start subtracting instead?
+
+The thing is that the velocity of the ball changes direction when it bounces, as the ball will go up (lower `y`-values). And, in general, it will keep its magnitude. So, if the velocity was 5 pixels/cycle, it should not be -5/cycle, right?
+
+So, instead of fixing the velocity to zero and stop the motion, change its sign:
+
+```python
+ball_velocity = ball_velocity * -1 # Reverse the velocity
+```
+
+The ball now bounces back up with the same speed it had when falling.
+
+## Step 7: Add energy loss when bouncing
+
+In real life, each bounce loses a bit of energy (due to friction), say 10%. We can copy that by reducing the velocity a little each time the ball hits the floor.
+
+First we need to define an energy loss constant:
+
+```python
+ENERGY_LOSS = 0.1
+```
+
+Then we refine how the velocity changes when bouncing, by keeping `(1- ENERGY_LOSS)` of it:
+
+```python
+ball_velocity = (ball_velocity * -1)
+ball_velocity = ball_velocity * (1 - ENERGY_LOSS)
+```
+
+Now when you run the code, the ball will bounce lower and lower each time, eventually settling.
+
+> [!WARNING]
+> Why does the ball never stops? See that 90% of something very small, is always something great than zero. We can say that if the velocity is very small when it bounces, say less than 4 pixels/cycle (you may need to find your value here!), then we fix it to zero. Use another `if` (inside the `else` to do this).
+
+## Step 8: Change circle to an image, add floor/background
+
+Time to make our simulation more "realistic", by replacing the circle with a actual image of a ball, and add a background. For this, we need to load another Python package at the very top of the file:
+
+```python
+import os
+```
+
+This helps us find and load files stored in folders.
+
+Right after setting up the screen, add the following code to load the ball and background images:
+
+```python
+# load assets
+ball_img = pygame.image.load(os.path.join("assets", "soccerball.png"))
+back_img = pygame.transform.scale(pygame.image.load(os.path.join("assets", "basketball-netball-court.png")), (WIDTH, HEIGHT))
+```
+
+To work with the new images, we will also increase the floor height so the ball can bounce higher and look right against the background:
+
+```python
+FLOOR_HEIGHT = 200  # Adjusted to suit the background image
+FLOOR_Y = HEIGHT - FLOOR_HEIGHT
+```
+
+Instead of drawing a circle to represent the ball, we can now blit an its image loaded (in variable `ball_img`) as follows:
+
+```python
+SCREEN.blit(ball_img, (ball_x, ball_y))
+```
+
+Similary, we can blit the background image (`back_img` variable) at the origin coordinate `(0, 0)` of the simulation screen so that it fits the whole screen.
+
+> [!IMPORTANT]
+> THink carefully the order of drawing, so that all background and ball are seen as wanted.
+
+This will make the ball look like a soccer ball and add a themed background.
+
+## Step 9: Add music
+
+In this step we will add sounds and music. We will include background music and a bounce sound effect each time the ball hits the floor.
+
+First, we need to import Pygame’s mixer system, which lets us play audio:
+
+```python
+import pygame
+from pygame import mixer
+import os
+pygame.init()
+mixer.init()
+```
+
+Next we load the music and sound files, by adding this two variables just after setting up the clock and frame rate:
+
+```python
+clock = pygame.time.Clock()
+FPS = 60
+
+# music
+bounce_sound = pygame.mixer.Sound(os.path.join("sound", "bounce.wav")) #define bounce as the sound in the file bounce.wav
+back_sound = pygame.mixer.Sound(os.path.join("sound", "back.mp3")) #define the background music
+```
+
+We can start playing the background sound anywhere before the simulation loop starts (the -1 option tells Pygame to repeat the track):
+
+```python
+back_sound.play(-1) # play background music on loop
+```
+
+The bouncing should only be added when the ball bounces:
+
+```python
+bounce_sound.play()
+```
+
+> [!WARNING]
+> Make sure the bouncing sound is only when it truly bounces, that is, when the ball will start  traveling upwards. ⏫
+
+## CONGRATULATIONS!
+
+Amazing! 🎆 🎆 You’ve now built a full animation using python! You’ve used concepts like:
+
+- Coordinate systems in the Cartesian plane.
+- Velocity and acceleration (as rate of change).
+- Conditional logic (if statements).
+- Repetition logic (simulation loop).
+- Arithmetic operation to model dynamics (e.g., multiplication by -1 and energy loss).
+- Collision detection.
+- Image and audio assets.
+
+Feel free to experiment with different sizes, speeds, colours, or even make your own version!
+
+## Step 10 (EXTENSION): Use Pygame's built-in collision detection
+
+If you want to go a bit further, Pygame has built-in tools to detect when objects bump into each other—this is called collision detection. Pygame uses something called a `Rect` (short for rectangle) to represent the position and size of things on the screen.
+
+We can create a rectangle around the ball and check if it overlaps with another rectangle (like the floor).
+
+The rectangles for the ball and floor need to be defined in the `variables` code block
+
+```python
+# variables
+
+run = True
+ball_x = WIDTH // 2 - ball_img.get_width() // 2
+ball_y = 100
+ball_velocity = 0
+ball_rect = pygame.Rect(ball_x, ball_y, ball_img.get_width(), ball_img.get_height())
+floor_rect = pygame.Rect(0, FLOOR_Y, WIDTH, FLOOR_HEIGHT)
+```
+
+Then in the main game loop, we check if the rectangle representing the ball has collided with the rectangle representing the floor, if not we update the velocity of the ball. Otherwise we reflect the balls velocity and add energy loss. We need to then reset the rectangle representing the ball to be analogous with the balls new position. The main game loop then looks like:
+
+```python
+# main game loop
+
+while run:
+
+    # loop through all events
+    for event in pygame.event.get():
+
+        # if the X / close button is pressed then exit the loop
+        if event.type == pygame.QUIT:
+            run = False
+
+    # draw
+
+    SCREEN.blit(back_img, (0, 0))
+    SCREEN.blit(ball_img, (ball_x, ball_y))
+   
+    # move
+   
+    if not pygame.Rect.colliderect(ball_rect, floor_rect):
+        ball_y += ball_velocity
+       
+    else:
+        ball_y = FLOOR_Y - ball_img.get_height()
+        ball_velocity = (ball_velocity * -1) + ENERGY_LOSS
+
+        if not (ball_velocity >  -3 and ball_velocity < 3):
+            bounce.play()
+```
+
+This is a more advanced technique, but it's useful if you want to check collisions between different objects—like bouncing off walls, hitting targets, or building a game.
 
 ## Contributors
 
