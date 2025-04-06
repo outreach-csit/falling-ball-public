@@ -16,6 +16,7 @@ This repository steps students through the project in a 1-day tutorial, beginnin
     - [Step 1: Set up the screen and draw a ball](#step-1-set-up-the-screen-and-draw-a-ball)
       - [Drawing a ball in the screen](#drawing-a-ball-in-the-screen)
     - [Step 2: Move the ball higher up](#step-2-move-the-ball-higher-up)
+  - [Step 3: Make the ball fall at constant speed](#step-3-make-the-ball-fall-at-constant-speed)
   - [Contributors](#contributors)
 
 
@@ -184,6 +185,35 @@ In this step, you are to:
 2. Put the ball higher up in the screen. You can do that by changing the variable that holds the `y` coordinate of the ball. 😉 Put the ball up in the screen so that it has "space" to fall, but is all visible. _What number would you use?_Remember that `(0, 0)` is not the middle of the screen, but the top-left corner.
 
 Go ahead and set the initial simulation step as you wish! 🖐️
+
+## Step 3: Make the ball fall at constant speed
+
+Now let us **add motion to the ball** so it falls down at a constant speed. 🔽 ⚽ 🔽
+
+The way to implement that is to update, in every simulation cycle, the position of the ball a bit down. Remember that the lower part of the screen has higher `y` values, as the very top has `y = 0`.
+
+So, each time the loop runs (which happens 60 times per second), we will update the ball `y` coordinate by adding a some small amount. For example, to move it three pixes per simulation step (one cycle), we can write:
+
+```python
+ball_y = ball_y + 3
+```
+
+In programming, this instruction is called an "**assignment**", as we are assigning the value at the right of the `=` symbol to the variable on the left side of the symbol `=`. In English, it says: _"set to variable `ball_y` to hold the value `ball_y + 3`"_ Python will first calculate the right hand side expression (`ball_y + 3` in our case), and then assign it to teh variable on the left (`ball_y`).
+
+> [!WARNING]
+> Variables can only hold one value at a time, so when you assign a value to a variable, the old value is "lost". If you want to keep it, for some reason, you would need to first store it in another variable; for example:
+
+```python
+old_ball_y = ball_y # save the current value
+ball_y = ball_y + 3
+```
+
+> [!TIP]
+> Many times, an assignment is about  add or subtract an amount to the existing value of a variable. This is what we did above. In those cases, there is a shortcut, namely:  `ball_y += 3` and `ball_y -= 3`.
+
+Now go ahead and implement the change. Be careful to do the change before the draw is drawn and inside the simulation loop (in the second phase). By updating `ball_y` by a small amount
+
+To try this, add `ball_y += 3` just below the `# Move` line in your code. When you run it, the ball should now fall downward at a constant speed. 👍
 
 ## Contributors
 
