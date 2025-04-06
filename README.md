@@ -169,6 +169,9 @@ The first command "fills" the `SCREEN` with `yellow` color, while the second one
 
 In this case, `pygame` is the library, `draw` is the module inside it, and `circle` is the **function** that does the actual drawing. All is provided by the library we imported at the top!
 
+> [!IMPORTANT]
+> Observe that some things are written in quotes, like, `"blue"`. These are **strings**, that is, data that is not a number, "textual data". If we just write `blue`, Python will think it is a variable called like that! In programming, we use strings to store and work with words, sentences, or any other kind of _text_. You can also manipulate them — like combining strings, cutting parts out, changing letters, or checking if certain words are inside.
+
 If you're using VS Code, you can hover over the function name to see what inputs it takes. Or you can search online—typing something like “pygame draw circle” into your browser will often give you clear documentation and examples. You can also use the interactive Python shell to explore help functions if you're comfortable doing so.
 
 ### Step 2: Move the ball higher up
