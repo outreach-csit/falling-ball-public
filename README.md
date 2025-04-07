@@ -33,7 +33,7 @@ This repository steps students through the project in a 1-day tutorial, beginnin
   - [Phase 4: Super Extensions](#phase-4-super-extensions)
     - [Step 10: Use Pygame's built-in collision detection](#step-10-use-pygames-built-in-collision-detection)
     - [Step 11: More accurate bouncing](#step-11-more-accurate-bouncing)
-  - [Contributors](#contributors)
+  - [CONTRIBUTORS](#contributors)
 
 ## Setup and Requirements
 
@@ -69,7 +69,7 @@ To get started with this tutorial, you will need to use VSCode, and get the star
 2. Create a new folder where you want your project to be, for example, folder `falling-ball`.
 3. Download the file `fall.py` file to your project folder. This can be done by using the download button at the top right corner in the file in GitHub:
 
-    ![](assets/gh-download.png)
+    ![download in GH](assets/gh-download.png)
 
     - Alternatively, you create an empty file [`fall.py`](https://raw.githubusercontent.com/outreach-csit/falling-ball-public/refs/heads/main/fall.py?token=GHSAT0AAAAAAC5GJNQPCTNCQHAGILHIVDE2Z7SGBWA) with VSCode in your project and then do copy-and-paste; GitHub has s button to copy the file contents into memory:
 4. Save the file.
@@ -80,7 +80,7 @@ All ready, it is time to run the code. You can do that by clinking the **PLAY** 
 
 You should see the following window, with a ball (or it is a sun? 🌞) in the center of the stage:
 
-![](assets/step_00-initial-screen.png)
+![initial](assets/step_00-initial-screen.png)
 
 ### Step 1: Set up the screen and draw a ball
 
@@ -538,7 +538,7 @@ This is a more advanced technique, but it's useful if you want to check collisio
 
 TODO
 
-## Contributors
+## CONTRIBUTORS
 
 - Prof. [Sebastian Sardina](https://github.com/ssardina) (contact: sebastian.sardina@rmit.edu.au)
 - Mr. [Marcos Sardina](https://github.com/msardina) (original Scratch project and first translation to Python)
