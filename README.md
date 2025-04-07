@@ -32,7 +32,7 @@ This repository steps students through the project in a 1-day tutorial, beginnin
     - [CONGRATULATIONS! 🎆](#congratulations--2)
   - [Phase 4: Super Extensions](#phase-4-super-extensions)
     - [Step 10: Use Pygame's built-in collision detection](#step-10-use-pygames-built-in-collision-detection)
-    - [Step 11: More accurrate bouncing](#step-11-more-accurrate-bouncing)
+    - [Step 11: More accurate bouncing](#step-11-more-accurate-bouncing)
   - [Contributors](#contributors)
 
 ## Setup and Requirements
@@ -534,13 +534,13 @@ while run:
 
 This is a more advanced technique, but it's useful if you want to check collisions between different objects—like bouncing off walls, hitting targets, or building a game.
 
-### Step 11: More accurrate bouncing
+### Step 11: More accurate bouncing
 
-...
+TODO
 
 ## Contributors
 
-- Prof. Sebastian Sardina (contact: sebastian.sardina@rmit.edu.au)
-- Mr. Marcos Sardina (original Scratch project and first translation to Python)
-- Dr. Timothy Wiley
-- Dr. Irina Grossman
+- Prof. [Sebastian Sardina](https://github.com/ssardina) (contact: sebastian.sardina@rmit.edu.au)
+- Mr. [Marcos Sardina](https://github.com/msardina) (original Scratch project and first translation to Python)
+- Dr. [Timothy Wiley](https://github.com/timothy-wiley)
+- Dr. [Irina Grossman](https://github.com/irigrossman?tab=repositories)
