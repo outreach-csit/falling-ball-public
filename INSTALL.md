@@ -12,68 +12,39 @@ In a nutshell, we need to have the following installed:
 
 Windows installation instructions for
 
-### VSCode
-
 1. [Download VSCode from for Windows][1] from the website.
-1. Follow the installer and use all default options.
+2. Follow the installer and use all default options.
+3. Open VSCode.
+4. Open a terminal (Menu Terminal -> New Terminal, or `Control+J`).
+5. Type `python` and hit `Enter`. Windows will not find it, but will pop up a window in the Microsoft Store to get it. Hit the button `Get` to install Python in your machine.
+6. Once installed, go back to the terminal in VSCode and type `python --version`. It should now say the version of Python installed in your machine.
+7. Finally, install the `pygame` module by running `pip install pygame`.
+   * Pip is a package manager for Python, to install available modules. Pip is installed by default in the windows installer, so it's not required.
 
-### Python 3
+> [!WARNING]
+>  VSCode may open a pop-up about creating a virtual container. Say 'no' or decline this message.
 
-1. [Download Python3 for Mac][2] from the website.
-1. Follow the installer and use all default options.
 
-### pygame
-
-1. Open VSCode
-1. Open a terminal (Menu Terminal -> New Terminal)
-1. Run the following command
-
-```shell
-python3 -m pip install -U pygame --user
-```
-
-Notes:
-
-* WARNING: VSCode may open a pop-up about creating a virtual container. Say 'no' or decline this message.
-* Pip is installed by default in the windows installer, so it's not required.
-* Only `python` may be required instead of `python3` depending on the machine.
+>[!NOTE]
+> The first time that you open a Python file in VSCode, VSCode will recognise that and ask you if you want to install its Python extension. Say YES/ISNTALL to get it installed. This way VSCode gets all the features to develop in Python.
 
 ## Mac Instructions
 
-Mac installation instructions for
-
-* VSCode
-* Python3
-* pygame
-
-Note that this setup uses the easiest to setup approach, using available installers.
-More advanced users may use brew.
-
-### VSCode
-
-1. [Download VSCode from for Mac][1] from the website.
-1. Follow the installer and use all default options.
-
-### Python 3
-
 1. [Download Python3 for Mac][2] from the website.
-1. Follow the installer and use all default options.
+2. Follow the installer and use all default options.
+3. [Download VSCode from for Mac][1] from the website.
+4. Follow the installer and use all default options.
+5. Open VSCode
+6. Open a terminal (Menu Terminal -> New Terminal, or `Control+J`)
+7. Run the following command to install Pygame module:
 
-### pygame
+    ```shell
+    python3 -m pip install -U pygame --user
+    ```
 
-1. Open VSCode
-1. Open a terminal (Menu Terminal -> New Terminal)
-1. Run the following command
+> [!NOTE]
+> Some newer systems may use `python` rather than `python3`. Also, this setup uses the easiest to setup approach, using available installers. More advanced users may use brew.
 
-```shell
-python3 -m pip install -U pygame --user
-```
-
-Notes:
-
-* WARNING: VSCode may open a pop-up about creating a virtual container. Say 'no' or decline this message.
-* Pip is installed by default in the windows installer, so it's not required.
-* Only `python` may be required instead of `python3` depending on the machine.
 
 [1]: https://code.visualstudio.com/download
 [2]: https://www.python.org/downloads/
