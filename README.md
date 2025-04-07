@@ -5,27 +5,34 @@ This is the public repository for The School of Computing Technologies workshop 
 This workshop teaches you how to code a simulator in Python that models how objects fall due to gravity.
 You'll learn the basics of physics behind free fall (including position, velocity, and acceleration) and how to translate those concepts into code. The workshop will focus on simulating a ball falling and rebounding off the ground, taking into account gravity and energy loss with each bounce. By the end, you’ll have built a simple yet powerful simulation that brings these physical principles to life using Python! 🏀 ⚽
 
-This workshop is based on the Scratch project [Falling Ball](https://scratch.mit.edu/projects/1106875189/).
+This workshop is based on the Scratch project [Falling Ball](https://scratch.mit.edu/projects/1106875189/) presented at [MAV Annual Conference 2022 and 2024](https://www.mav.vic.edu.au/Conference/Previous-Annual-Conferences).
 
 This repository steps students through the project in a 1-day tutorial, beginning with starter code in [fall.py](fall.py).
 
 - [RMIT SCT Falling Ball Workshop](#rmit-sct-falling-ball-workshop)
   - [Setup and Requirements](#setup-and-requirements)
   - [Tutorial Overview](#tutorial-overview)
-  - [Step 0: Setup VSCode and the code](#step-0-setup-vscode-and-the-code)
-  - [Step 1: Set up the screen and draw a ball](#step-1-set-up-the-screen-and-draw-a-ball)
-    - [Drawing a ball in the screen](#drawing-a-ball-in-the-screen)
-  - [Step 2: Move the ball higher up](#step-2-move-the-ball-higher-up)
-  - [Step 3: Make the ball fall at constant speed](#step-3-make-the-ball-fall-at-constant-speed)
-  - [Step 4: Add a floor](#step-4-add-a-floor)
-    - [Detect collision with the floor](#detect-collision-with-the-floor)
-  - [Step 5: Add gravity as acceleration](#step-5-add-gravity-as-acceleration)
-  - [Step 6: Make the ball bounce (no energy loss)](#step-6-make-the-ball-bounce-no-energy-loss)
-  - [Step 7: Add energy loss when bouncing](#step-7-add-energy-loss-when-bouncing)
-  - [Step 8: Change circle to an image, add floor/background](#step-8-change-circle-to-an-image-add-floorbackground)
-  - [Step 9: Add music](#step-9-add-music)
-  - [CONGRATULATIONS!](#congratulations)
-  - [Step 10 (EXTENSION): Use Pygame's built-in collision detection](#step-10-extension-use-pygames-built-in-collision-detection)
+  - [Phase 1: The Basics](#phase-1-the-basics)
+    - [Step 0: Setup VSCode and the code](#step-0-setup-vscode-and-the-code)
+    - [Step 1: Set up the screen and draw a ball](#step-1-set-up-the-screen-and-draw-a-ball)
+      - [Drawing a ball in the screen](#drawing-a-ball-in-the-screen)
+    - [Step 2: Move the ball higher up](#step-2-move-the-ball-higher-up)
+    - [Step 3: Make the ball fall at constant speed](#step-3-make-the-ball-fall-at-constant-speed)
+    - [Step 4: Add a floor](#step-4-add-a-floor)
+      - [Detect collision with the floor](#detect-collision-with-the-floor)
+    - [CONGRATULATIONS! 🎆](#congratulations-)
+  - [Phase 2: Advanced features](#phase-2-advanced-features)
+    - [Step 5: Add gravity as acceleration](#step-5-add-gravity-as-acceleration)
+    - [Step 6: Make the ball bounce (no energy loss)](#step-6-make-the-ball-bounce-no-energy-loss)
+    - [Step 7: Add energy loss when bouncing](#step-7-add-energy-loss-when-bouncing)
+    - [CONGRATULATIONS! 🎆](#congratulations--1)
+  - [Phase 3: Look \& Feel](#phase-3-look--feel)
+    - [Step 8: Change circle to an image, add floor/background](#step-8-change-circle-to-an-image-add-floorbackground)
+    - [Step 9: Add music](#step-9-add-music)
+    - [CONGRATULATIONS! 🎆](#congratulations--2)
+  - [Phase 4: Super Extensions](#phase-4-super-extensions)
+    - [Step 10: Use Pygame's built-in collision detection](#step-10-use-pygames-built-in-collision-detection)
+    - [Step 11: More accurrate bouncing](#step-11-more-accurrate-bouncing)
   - [Contributors](#contributors)
 
 ## Setup and Requirements
@@ -52,7 +59,9 @@ The system uses Python and [pygame](http://www.pygame.org/wiki/about), a toolkit
 
 We have already provided an initial code template in file [fall.py](fall.py). You need to copy-and-paste the contents of this file into your own VSCode folder.
 
-## Step 0: Setup VSCode and the code
+## Phase 1: The Basics
+
+### Step 0: Setup VSCode and the code
 
 To get started with this tutorial, you will need to use VSCode, and get the starting Python code file. To get underway:
 
@@ -73,7 +82,7 @@ You should see the following window, with a ball (or it is a sun? 🌞) in the c
 
 ![](assets/step_00-initial-screen.png)
 
-## Step 1: Set up the screen and draw a ball
+### Step 1: Set up the screen and draw a ball
 
 In the first step, we just want to **understand** the code we were given. Having a good understanding of each piece will be important to know how to modify it later on... 😉
 
@@ -155,7 +164,7 @@ In the second step, which we will explain below, the simulation **does all the u
 
 The final step in each simulation cycle is to **re-draw and update the screen**, that is, to draw the "new picture" with the changes just done in step 2! ✏️
 
-### Drawing a ball in the screen
+#### Drawing a ball in the screen
 
 Let us look at the second step in the simulation cycle. The initial code does two things:
 
@@ -185,7 +194,7 @@ If you're using VS Code, you can hover over the function name to see what inputs
 
 > **QUESTION**: what would happen if we swap the instructions, and we first draw the ball and then fill the background? Try it!
 
-## Step 2: Move the ball higher up
+### Step 2: Move the ball higher up
 
 Time to do implement some of _our_ changes!
 
@@ -196,7 +205,7 @@ In this step, you are to:
 
 Go ahead and set the initial simulation step as you wish! 🖐️
 
-## Step 3: Make the ball fall at constant speed
+### Step 3: Make the ball fall at constant speed
 
 Now let us **add motion to the ball** so it falls down at a constant speed. 🔽 ⚽ 🔽
 
@@ -225,7 +234,7 @@ Now go ahead and implement the change. Be careful to do the change before the dr
 
 To try this, add `ball_y += 3` just below the `# Move` line in your code. When you run it, the ball should now fall downward at a constant speed. 👍
 
-## Step 4: Add a floor
+### Step 4: Add a floor
 
 Wow, _how come the ball keeps going down and disappears out of the screen?_ What happens when `ball_y` becomes larger than the value of `HEIGHT` (800 in our case)?
 
@@ -250,7 +259,7 @@ pygame.draw.rect(SCREEN, "black", (0, FLOOR_Y, WIDTH, HEIGHT))
 
 **Try it!**
 
-### Detect collision with the floor
+#### Detect collision with the floor
 
 We have the floor, but the ball keeps going through it! 😕 Remember, for the computer these are just colors.
 
@@ -267,7 +276,23 @@ if not (ball_y) > FLOOR_Y:
 
 Try it! Does it work? If not exactly as you would expect, _why?_ What does the coordinate `(ball_x, ball_y)` represent exactly? What place in the ball? Think how you can fix it by slightly fixing teh condition in the `if`-conditional.
 
-## Step 5: Add gravity as acceleration
+### CONGRATULATIONS! 🎆
+
+Well done! 👏 👏 You’ve got the core part of a simulation. You have:
+
+- Installed your development environment to be able to code and run!
+- Used coordinate systems in the Cartesian plane.
+- Implemented (fixed) velocity as a change of position.
+- Used conditional logic (if statements).
+- Used repetition/loop logic (simulation loop).
+- Used arithmetic expressions and logical conditions to model the ball dynamics.
+- Implemented collision detection with the floor.
+
+Feel free to experiment with different sizes, speeds, colours, or even make your own version!
+
+## Phase 2: Advanced features
+
+### Step 5: Add gravity as acceleration
 
 In real life, gravity speeds things up as they fall. We can copy that by gradually increasing the ball’s speed every frame.
 
@@ -315,7 +340,7 @@ Now, _what should the velocity when the ball does hit the floor?_ Check the code
 
 Now when you Run the file the ball should fall faster and faster and then stop when it hits the floor... 🏀
 
-## Step 6: Make the ball bounce (no energy loss)
+### Step 6: Make the ball bounce (no energy loss)
 
 We are doing great, but surely a ball doesn't get stuck in the floor at the first collision, at least not a soccer ⚽ or basketball 🏀 ball!
 
@@ -331,7 +356,7 @@ ball_velocity = ball_velocity * -1 # Reverse the velocity
 
 The ball now bounces back up with the same speed it had when falling.
 
-## Step 7: Add energy loss when bouncing
+### Step 7: Add energy loss when bouncing
 
 In real life, each bounce loses a bit of energy (due to friction), say 10%. We can copy that by reducing the velocity a little each time the ball hits the floor.
 
@@ -353,7 +378,20 @@ Now when you run the code, the ball will bounce lower and lower each time, event
 > [!WARNING]
 > Why does the ball never stops? See that 90% of something very small, is always something great than zero. We can say that if the velocity is very small when it bounces, say less than 4 pixels/cycle (you may need to find your value here!), then we fix it to zero. Use another `if` (inside the `else` to do this).
 
-## Step 8: Change circle to an image, add floor/background
+### CONGRATULATIONS! 🎆
+
+Well done! 👏 👏 You’ve implemented some more realistic features into your simulation. You have:
+
+- Abstracted the fixed velocity to a variable. This is necessary if we ever want to change the velocity of the ball!
+- Implemented gravity as acceleration on the ball: change of velocity.
+- Simulated the bounce of the ball by using integers and multiplication by -1.
+- Implemented loss of energy when bouncing, using notions of percentage and multiplications with a number between 0 and 1.
+
+The actual simulator is finished. In the following, we will make it look "nicer".
+
+## Phase 3: Look & Feel
+
+### Step 8: Change circle to an image, add floor/background
 
 Time to make our simulation more "realistic", by replacing the circle with a actual image of a ball, and add a background. For this, we need to load another Python package at the very top of the file:
 
@@ -391,7 +429,7 @@ Similary, we can blit the background image (`back_img` variable) at the origin c
 
 This will make the ball look like a soccer ball and add a themed background.
 
-## Step 9: Add music
+### Step 9: Add music
 
 In this step we will add sounds and music. We will include background music and a bounce sound effect each time the ball hits the floor.
 
@@ -431,21 +469,19 @@ bounce_sound.play()
 > [!WARNING]
 > Make sure the bouncing sound is only when it truly bounces, that is, when the ball will start  traveling upwards. ⏫
 
-## CONGRATULATIONS!
+### CONGRATULATIONS! 🎆
 
-Amazing! 🎆 🎆 You’ve now built a full animation using python! You’ve used concepts like:
+Amazing! 👏 👏 You’ve now built a full animation using Python, and it lokos great! You have:
 
-- Coordinate systems in the Cartesian plane.
-- Velocity and acceleration (as rate of change).
-- Conditional logic (if statements).
-- Repetition logic (simulation loop).
-- Arithmetic operation to model dynamics (e.g., multiplication by -1 and energy loss).
-- Collision detection.
-- Image and audio assets.
+- Loaded images and audio files into variables.
+- Use images to represent the ball (rather than the circle), and the background (rather than a flat color).
+- Play sounds, both in the background and at bouncing using `if` conditional.
 
 Feel free to experiment with different sizes, speeds, colours, or even make your own version!
 
-## Step 10 (EXTENSION): Use Pygame's built-in collision detection
+## Phase 4: Super Extensions
+
+### Step 10: Use Pygame's built-in collision detection
 
 If you want to go a bit further, Pygame has built-in tools to detect when objects bump into each other—this is called collision detection. Pygame uses something called a `Rect` (short for rectangle) to represent the position and size of things on the screen.
 
@@ -498,10 +534,13 @@ while run:
 
 This is a more advanced technique, but it's useful if you want to check collisions between different objects—like bouncing off walls, hitting targets, or building a game.
 
+### Step 11: More accurrate bouncing
+
+...
+
 ## Contributors
 
 - Prof. Sebastian Sardina (contact: sebastian.sardina@rmit.edu.au)
 - Mr. Marcos Sardina (original Scratch project and first translation to Python)
 - Dr. Timothy Wiley
 - Dr. Irina Grossman
-- Dr. Daniel Beck
